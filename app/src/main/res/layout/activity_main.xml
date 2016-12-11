@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="frictionmitch.com.cameraadvanced.MainActivity">
+
+
+<!--
+    <ImageView
+        android:id="@+id/camera_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="#095656"
+        android:gravity="center" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            app:srcCompat="@mipmap/gut"
+            android:scaleType="fitCenter"
+            android:cropToPadding="false"
+            android:adjustViewBounds="false"/>
+        <Button
+            android:id="@+id/capture_image_button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/start_image_capture"
+            android:layout_gravity="bottom|left"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+
+        <Button
+            android:id="@+id/save_image_button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/save_image"
+            android:layout_gravity="bottom|right"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+        </RelativeLayout>
+
+        </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">CameraAdvanced</string>
+    <string name="action_settings">Settings</string>
+    <string name="start_image_capture">Take a New Picture</string>
+    <string name="capture_image">Snap it!</string>
+    <string name="save_image">Save Picture</string>
+    <string name="recapture_image">Retake Picture</string>
+    <string name="capturing_image">Taking New Picture</string>
+    <string name="done">Done</string>
+    <string name="switch_camera">Switch</string>
+
+    <string-array name="heading">
+        <item>You are SCREWED!</item>
+        <item>Lots of time</item>
+        <item>Too late</item>
+        <item>You are going to need a bath</item>
+        <item>What the hell did you eat?</item>
+        <item>Forget new underwear...you are going to need a new toilet after this</item>
+    </string-array>
+
+    <string-array name="no_time">
+        <item>20 minutes max</item>
+        <item>90 seconds and counting</item>
+        <item>about 5 minutes</item>
+        <item>less than 10 minutes</item>
+    </string-array>
+</resources>
