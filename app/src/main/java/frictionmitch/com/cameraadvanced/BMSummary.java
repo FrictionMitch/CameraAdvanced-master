@@ -1,29 +1,15 @@
 package frictionmitch.com.cameraadvanced;
 
 
-import java.io.IOException;
-import java.util.List;
 import java.util.Random;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.hardware.Camera;
-import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +31,7 @@ public class BMSummary extends Activity {
 
 
 
-        mTextView = (TextView)findViewById(R.id.text_view);
+        mTextView = (TextView)findViewById(R.id.textViewSummary);
         mTextView.setText(randomText());
 
         mRandomTextView = (TextView)findViewById(R.id.randomTextView);
