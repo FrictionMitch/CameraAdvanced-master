@@ -18,10 +18,43 @@
         <item>Forget new underwear...you are going to need a new toilet after this</item>
     </string-array>
 
-    <string-array name="no_time">
+    <string-array name="countdown">
         <item>20 minutes max</item>
         <item>90 seconds and counting</item>
         <item>about 5 minutes</item>
         <item>less than 10 minutes</item>
+    </string-array>
+
+    <string-array name="expiry">
+        <item>24 hours-ish</item>
+        <item>30 seconds</item>
+        <item>1 hour</item>
+    </string-array>
+
+    <string-array name="girth">
+        <item>ever see a pylon...yeah, that is smaller than the wide end</item>
+        <item>baby carrot</item>
+        <item>curly fry</item>
+        <item>banana</item>
+    </string-array>
+
+    <string-array name="weight">
+        <item>5 lbs</item>
+        <item>half your current weight</item>
+        <item>25 lbs</item>
+    </string-array>
+
+    <string-array name="flushes">
+        <item>5</item>
+        <item>2</item>
+        <item>1</item>
+        <item>none...better show this one off</item>
+    </string-array>
+
+    <string-array name="viscosity">
+        <item>soup</item>
+        <item>syrup</item>
+        <item>play-doh</item>
+        <item>diamonds</item>
     </string-array>
 </resources>

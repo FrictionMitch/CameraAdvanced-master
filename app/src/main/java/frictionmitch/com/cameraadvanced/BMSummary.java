@@ -19,8 +19,15 @@ public class BMSummary extends Activity {
 
     private Button mBackButton;
     private ImageButton mBackImageButton;
-    private TextView mTextView;
+    private TextView mSummaryTextView;
     private TextView mRandomTextView;
+    private TextView mCountdownTextView;
+    private TextView mExpiryTextView;
+    private TextView mGirthTextView;
+    private TextView mWeightTextView;
+    private TextView mFlushesTextView;
+    private TextView mViscosityTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +38,32 @@ public class BMSummary extends Activity {
 
 
 
-        mTextView = (TextView)findViewById(R.id.textViewSummary);
-        mTextView.setText(randomText());
+        mSummaryTextView = (TextView)findViewById(R.id.textViewSummary);
+        mSummaryTextView.setText(randomText());
 
-        mRandomTextView = (TextView)findViewById(R.id.randomTextView);
-        mRandomTextView.setText(randomTime());
+//        mRandomTextView = (TextView)findViewById(R.id.countdownTextView);
+//        mRandomTextView.setText(randomCountdown());
+
+        mCountdownTextView = (TextView)findViewById(R.id.countdownTextView);
+        mCountdownTextView.setText(randomText(this.getResources().getStringArray(R.array.countdown)));
+
+        mExpiryTextView = (TextView)findViewById(R.id.expiryTextView);
+        mExpiryTextView.setText(randomText(this.getResources().getStringArray(R.array.expiry)));
+
+        mGirthTextView = (TextView)findViewById(R.id.girthTextView);
+        mGirthTextView.setText(randomText(this.getResources().getStringArray(R.array.girth)));
+
+        mWeightTextView = (TextView)findViewById(R.id.weightTextView);
+        mWeightTextView.setText(randomText(this.getResources().getStringArray(R.array.weight)));
+
+        mFlushesTextView = (TextView)findViewById(R.id.flushesTextView);
+        mFlushesTextView.setText(randomText(this.getResources().getStringArray(R.array.flushes)));
+
+        mViscosityTextView = (TextView)findViewById(R.id.viscosityTextView);
+        mViscosityTextView.setText(randomText(this.getResources().getStringArray(R.array.viscosity)));
 //        randomText();
-//        mTextView.setText(randomText().toString());
-//        Toast.makeText(this, mTextView.getText(), Toast.LENGTH_SHORT).show();
+//        mSummaryTextView.setText(randomText().toString());
+//        Toast.makeText(this, mSummaryTextView.getText(), Toast.LENGTH_SHORT).show();
 
 //        mSwitchCamera = (Button) findViewById(R.id.switch_camera);
 //        mSwitchCamera.setOnClickListener(mSwitchCameraButtonClickListener);
@@ -66,10 +91,22 @@ public class BMSummary extends Activity {
         return randomHeading;
     }
 
-    private String randomTime() {
-        String[] array = this.getResources().getStringArray(R.array.no_time);
-        String randomTime = array[new Random().nextInt(array.length)];
-        return randomTime;
+    private String randomCountdown() {
+        String[] array = this.getResources().getStringArray(R.array.countdown);
+        String countdown = array[new Random().nextInt(array.length)];
+        return countdown;
+    }
+
+    private String randomExpiry() {
+        String[] array = this.getResources().getStringArray(R.array.expiry);
+        String expiry = array[new Random().nextInt(array.length)];
+        return expiry;
+    }
+
+    private String randomText(String[] stringArray) {
+        String[] array = stringArray;
+        String string = array[new Random().nextInt(array.length)];
+        return string;
     }
 
     private OnClickListener showToast = new OnClickListener() {
