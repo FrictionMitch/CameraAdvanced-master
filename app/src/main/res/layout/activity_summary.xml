@@ -20,66 +20,39 @@
             android:layout_alignParentTop="true"
             android:paddingTop="@dimen/activity_vertical_margin"/>
 
-        <Button
-            android:id="@+id/back_button"
-            android:text="Back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="false"
-            android:layout_weight="0"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:onClick="showToast"/>
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/summary"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:id="@+id/textViewSummary"
-            android:textAlignment="viewStart"
-            android:typeface="normal"
-            android:textStyle="normal|bold"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"/>
 
 
         <TextView
-            android:text="Countdown"
+            android:text="Countdown:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:id="@+id/countdown"
-            android:layout_below="@+id/textViewSummary"
-            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+            android:layout_below="@+id/summary"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textStyle="normal|bold"/>
 
         <TextView
-            android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textViewSummary"
+            android:layout_below="@+id/bottomLineTextView"
             android:layout_toEndOf="@+id/countdown"
             android:layout_marginStart="17dp"
             android:id="@+id/countdownTextView"
             android:layout_alignTop="@+id/countdown"/>
 
         <TextView
-            android:text="Expiry Date"
+            android:text="Expiry Date:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/countdownTextView"
             android:layout_toStartOf="@+id/countdownTextView"
             android:layout_marginTop="32dp"
-            android:id="@+id/expiry"/>
+            android:id="@+id/expiry"
+            android:textStyle="normal|bold"/>
 
         <TextView
-            android:text="Expiry Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/countdownTextView"
@@ -95,10 +68,10 @@
             android:layout_below="@+id/expiryTextView"
             android:layout_alignStart="@+id/countdown"
             android:layout_marginTop="41dp"
-            android:id="@+id/girth"/>
+            android:id="@+id/girth"
+            android:textStyle="normal|bold"/>
 
         <TextView
-            android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/girth"
@@ -114,10 +87,10 @@
             android:layout_below="@+id/girth"
             android:layout_alignStart="@+id/girth"
             android:layout_marginTop="44dp"
-            android:id="@+id/weight"/>
+            android:id="@+id/weight"
+            android:textStyle="normal|bold"/>
 
         <TextView
-            android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/weight"
@@ -132,10 +105,10 @@
             android:layout_below="@+id/weight"
             android:layout_alignStart="@+id/weight"
             android:layout_marginTop="62dp"
-            android:id="@+id/flushes"/>
+            android:id="@+id/flushes"
+            android:textStyle="normal|bold"/>
 
         <TextView
-            android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/flushes"
@@ -144,22 +117,66 @@
             android:layout_marginStart="@dimen/activity_horizontal_margin"/>
 
         <TextView
-            android:text="Viscosity"
+            android:text="Viscosity:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/flushes"
             android:layout_alignStart="@+id/flushes"
             android:layout_marginTop="37dp"
-            android:id="@+id/viscosity"/>
+            android:id="@+id/viscosity"
+            android:textStyle="normal|bold"/>
 
         <TextView
-            android:text="TextView"
+            android:id="@+id/viscosityTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/viscosity"
             android:layout_toEndOf="@+id/viscosity"
-            android:id="@+id/viscosityTextView"
             android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+            android:text="Bottom Line:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viscosity"
+            android:layout_alignStart="@+id/expiry"
+            android:layout_marginTop="39dp"
+            android:id="@+id/bottomLine"/>
+
+
+        <TextView
+            android:text="This is a test"
+            android:id="@+id/bottomLineTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:typeface="normal"
+            android:textStyle="normal|bold"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:layout_above="@+id/back_button"
+            />
+
+
+
+        <Button
+            android:id="@+id/back_button"
+            android:text="Back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:layout_weight="0"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="showToast"/>
+
+
+
+
 
 
 </RelativeLayout>

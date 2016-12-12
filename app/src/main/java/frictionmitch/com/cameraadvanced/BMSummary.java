@@ -38,7 +38,7 @@ public class BMSummary extends Activity {
 
 
 
-        mSummaryTextView = (TextView)findViewById(R.id.textViewSummary);
+        mSummaryTextView = (TextView)findViewById(R.id.bottomLineTextView);
         mSummaryTextView.setText(randomText());
 
 //        mRandomTextView = (TextView)findViewById(R.id.countdownTextView);
