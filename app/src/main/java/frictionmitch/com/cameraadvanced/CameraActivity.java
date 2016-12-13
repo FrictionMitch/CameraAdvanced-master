@@ -446,7 +446,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
         AnimationSet scale = new AnimationSet(false);
         scale.addAnimation(scaleAnimation);
-        scale.addAnimation(reverseScaleAnimation);
+//        scale.addAnimation(reverseScaleAnimation);
         mStomachImageButton.startAnimation(scale);
     }
 
