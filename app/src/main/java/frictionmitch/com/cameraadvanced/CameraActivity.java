@@ -10,19 +10,21 @@ import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import static android.R.attr.value;
 
 
 public class CameraActivity extends Activity implements PictureCallback, SurfaceHolder.Callback {
@@ -30,6 +32,9 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     public static final String EXTRA_CAMERA_DATA = "camera_data";
 
     private static final String KEY_IS_CAPTURING = "is_capturing";
+
+    final Handler handler = new Handler();
+
     private int screenWidth;
 
     private Camera mCamera;
@@ -106,10 +111,20 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     private OnClickListener mStomachButtonClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            scale();
+//            reverseScale();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Do something after 5s = 5000ms
+
             Intent myIntent = new Intent(CameraActivity.this, BMSummary.class);
             CameraActivity.this.startActivity(myIntent);
             mCamera.release();
             mCamera = null;
+                }
+            }, 2000);
 
         }
     };
@@ -416,6 +431,40 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         LinearLayout LinearLayoutImageCenter=(LinearLayout) findViewById(R.id.linear_layout);
         mStomachImageButton.setPadding(DeviceTotalWidth/4,DeviceTotalHeight/4,0,0);
     }
+
+    public void scale() {
+        mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
+        mStomachImageButton.setImageResource(R.mipmap.gut);
+        mStomachImageButton.clearAnimation();
+
+        Animation scaleAnimation = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.scale_animation);
+
+        Animation reverseScaleAnimation = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.reverse_scale_animation);
+
+
+        AnimationSet scale = new AnimationSet(false);
+        scale.addAnimation(scaleAnimation);
+        scale.addAnimation(reverseScaleAnimation);
+        mStomachImageButton.startAnimation(scale);
+    }
+
+//    public void reverseScale() {
+//        mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
+//        mStomachImageButton.setImageResource(R.mipmap.gut);
+//        mStomachImageButton.clearAnimation();
+//
+//        Animation scaleAnimation = AnimationUtils.loadAnimation(
+//                getApplicationContext(), R.anim.reverse_scale_animation);
+////        mStomachImageButton.setAnimation(scaleAnimation);
+//        mStomachImageButton.startAnimation(scaleAnimation);
+//
+//        AnimationSet s = new AnimationSet(false);//false means don't share interpolators
+//        s.addAnimation(traintween);
+//        s.addAnimation(trainfad);
+//        mytrain.startAnimation(s);
+//    }
 }
 //
 //public class CameraActivity extends SurfaceView implements SurfaceHolder.Callback {

@@ -141,7 +141,8 @@
             android:layout_below="@+id/viscosity"
             android:layout_alignStart="@+id/expiry"
             android:layout_marginTop="39dp"
-            android:id="@+id/bottomLine"/>
+            android:id="@+id/bottomLine"
+            android:textStyle="normal|bold"/>
 
 
         <TextView
