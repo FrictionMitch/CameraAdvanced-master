@@ -29,6 +29,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,6 +53,9 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
     private int screenWidth;
 
+    // Create a string for the ImageView label
+    private static final String IMAGEVIEW_TAG = "icon bitmap";
+
     private Camera mCamera;
     private ImageView mCameraImage;
     private SurfaceView mCameraPreview;
@@ -64,6 +68,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     private int switchCount = 1;
     private Button mSwitchCamera;
     private BMSummary bmSummary;
+    private FrameLayout mFrameLayout;
 
     private ScaleGestureDetector mScaleDetector;
     private float mScaleFactor = 1.f;
@@ -133,12 +138,50 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
 
     //TODO: set stomach button to drag (code below)
-    private OnTouchListener mStomachButtonTouchListener = new OnTouchListener() {
+
+    private View.OnDragListener mFrameLayoutDragListener = (new View.OnDragListener() {
+       @Override
+        public boolean onDrag(View v, DragEvent event) {
+           final int action = event.getAction();
+
+           switch (action) {
+               case DragEvent.ACTION_DRAG_STARTED:
+                   break;
+               case DragEvent.ACTION_DRAG_EXITED:
+                   break;
+               case DragEvent.ACTION_DRAG_ENTERED:
+                   break;
+               case DragEvent.ACTION_DROP: {
+//                   failure++;
+                   return(true);
+               }
+
+               case DragEvent.ACTION_DRAG_ENDED:{
+//                   total = total +1;
+//                   int suc = total - failure;
+//                   sucess.setText("Sucessful Drops :"+suc);
+//                   text.setText("Total Drops: "+total);
+                   return(true);
+               }
+               default:
+                   break;
+           }
+           return true;
+       }
+    });
+
+    private View.OnTouchListener mStomachButtonTouchListener = (new View.OnTouchListener() {
+
         @Override
-        public boolean onTouch(View v, MotionEvent event) {
+        public boolean onTouch(View v, MotionEvent arg1) {
+            // TODO Auto-generated method stub
+            ClipData data = ClipData.newPlainText("", "");
+            View.DragShadowBuilder shadow = new View.DragShadowBuilder(mStomachImageButton);
+            v.startDrag(data, shadow, null, 0);
             return false;
         }
-    };
+    });
+
 
     private OnClickListener mStomachButtonClickListener = new OnClickListener() {
         @Override
@@ -162,24 +205,12 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     };
 
 
-
-
-//    public CameraActivity(Camera camera) {
-////        super(context);
-//
-//        mCamera = camera;
-//        mCamera.setDisplayOrientation(90);
-//        //get the holder and set this class as the callback, so we can get camera data here
-//        mHolder = getHolder();
-//        mHolder.addCallback(this);
-//        mHolder.setType(SurfaceHolder.SURFACE_TYPE_NORMAL);
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_camera);
+
 
         mCameraImage = (ImageView) findViewById(R.id.camera_image_view);
         mCameraImage.setVisibility(View.INVISIBLE);
@@ -193,9 +224,15 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         mSwitchCamera = (Button) findViewById(R.id.switch_camera);
         mSwitchCamera.setOnClickListener(mSwitchCameraButtonClickListener);
 
+        mFrameLayout = (FrameLayout)findViewById(R.id.camera_frame);
+//        mFrameLayout.setOnDragListener(mFrameLayoutDragListener);
+
+
         mStomachImageButton = (ImageButton) findViewById(R.id.stomachButton);
         mStomachImageButton.setOnClickListener(mStomachButtonClickListener);
-        mStomachImageButton.setOnTouchListener(mStomachButtonTouchListener);
+//        mStomachImageButton.setOnLongClickListener(mStomachButtonLongClickListener);
+//        mStomachImageButton.setOnDragListener(mStomachButtonDragListener);
+//        mStomachImageButton.setOnTouchListener(mStomachButtonTouchListener);
 
 //        mStomachImageButton.setOnClickListener(mHideImageButtonClickListener);
 
@@ -490,6 +527,12 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 //        scale.addAnimation(reverseScaleAnimation);
         mStomachImageButton.startAnimation(scale);
     }
+
+
+
+
+
+
 
 
 //    private class ScaleListener
