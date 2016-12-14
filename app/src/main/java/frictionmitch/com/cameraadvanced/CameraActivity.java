@@ -18,10 +18,13 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
@@ -61,6 +64,10 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     private int switchCount = 1;
     private Button mSwitchCamera;
     private BMSummary bmSummary;
+
+    private ScaleGestureDetector mScaleDetector;
+    private float mScaleFactor = 1.f;
+    private float mLastTouch;
 //    private SurfaceHolder mHolder;
 
 
@@ -124,6 +131,15 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         }
     };
 
+
+    //TODO: set stomach button to drag (code below)
+    private OnTouchListener mStomachButtonTouchListener = new OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return false;
+        }
+    };
+
     private OnClickListener mStomachButtonClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -145,12 +161,6 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         }
     };
 
-    public int pixelsToDp(int dp) {
-        int padding_in_dp = dp;  // 6 dps
-        final float scale = getResources().getDisplayMetrics().density;
-        int padding_in_px = (int) (padding_in_dp * scale + 0.5f);
-        return padding_in_px;
-    }
 
 
 
@@ -185,6 +195,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
         mStomachImageButton = (ImageButton) findViewById(R.id.stomachButton);
         mStomachImageButton.setOnClickListener(mStomachButtonClickListener);
+        mStomachImageButton.setOnTouchListener(mStomachButtonTouchListener);
 
 //        mStomachImageButton.setOnClickListener(mHideImageButtonClickListener);
 
@@ -456,12 +467,44 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         Animation reverseScaleAnimation = AnimationUtils.loadAnimation(
                 getApplicationContext(), R.anim.reverse_scale_animation);
 
+        Animation blinkAnimation = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.blink);
+
+        Animation fadeAnimation = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.fade);
+
+        Animation rotateAnimation = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.rotate);
+
+        Animation slideAnimation = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.slide);
+
+
 
         AnimationSet scale = new AnimationSet(false);
         scale.addAnimation(scaleAnimation);
+//        scale.addAnimation(slideAnimation);
+//        scale.addAnimation(rotateAnimation);
+//        scale.addAnimation(blinkAnimation);
+//        scale.addAnimation(fadeAnimation);
 //        scale.addAnimation(reverseScaleAnimation);
         mStomachImageButton.startAnimation(scale);
     }
+
+
+//    private class ScaleListener
+//            extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+//        @Override
+//        public boolean onScale(ScaleGestureDetector detector) {
+//            mScaleFactor *= detector.getScaleFactor();
+//
+//            // Don't let the object get too small or too large.
+//            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
+//
+//            invalidate();
+//            return true;
+//        }
+//    }
 
 //    public void reverseScale() {
 //        mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
