@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,7 +13,10 @@ import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.MotionEventCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -24,7 +29,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import static android.view.MotionEvent.INVALID_POINTER_ID;
 
 
 public class CameraActivity extends Activity implements PictureCallback, SurfaceHolder.Callback {
@@ -33,7 +41,11 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
     private static final String KEY_IS_CAPTURING = "is_capturing";
 
+    private int mActivePointerId = INVALID_POINTER_ID;
+
     final Handler handler = new Handler();
+
+    private android.widget.RelativeLayout.LayoutParams layoutParams;
 
     private int screenWidth;
 
@@ -89,11 +101,15 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     };
 
     private OnClickListener mHideFartImageButtonClickListener = new OnClickListener() {
+
         @Override
         public void onClick(View v) {
             swapImageButton();
         }
+
     };
+
+
 
     private OnClickListener mSwitchCameraButtonClickListener = new OnClickListener() {
         @Override
@@ -124,7 +140,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
             mCamera.release();
             mCamera = null;
                 }
-            }, 2000);
+            }, 4000);
 
         }
     };
@@ -169,6 +185,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
         mStomachImageButton = (ImageButton) findViewById(R.id.stomachButton);
         mStomachImageButton.setOnClickListener(mStomachButtonClickListener);
+
 //        mStomachImageButton.setOnClickListener(mHideImageButtonClickListener);
 
         mFartImageButton = (ImageButton) findViewById(R.id.fartButton);
@@ -417,10 +434,6 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         }
     }
 
-    public void scaleImage() {
-
-    }
-
     public void getCenter() {
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
@@ -465,6 +478,12 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 //        s.addAnimation(trainfad);
 //        mytrain.startAnimation(s);
 //    }
+
+    // The ‘active pointer’ is the one currently moving our object.
+
+
+
+
 }
 //
 //public class CameraActivity extends SurfaceView implements SurfaceHolder.Callback {
