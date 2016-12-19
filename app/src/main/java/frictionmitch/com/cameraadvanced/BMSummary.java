@@ -27,6 +27,7 @@ public class BMSummary extends Activity {
     private TextView mWeightTextView;
     private TextView mFlushesTextView;
     private TextView mViscosityTextView;
+    private Button mMapButton;
 
 
     @Override
@@ -61,6 +62,11 @@ public class BMSummary extends Activity {
 
         mViscosityTextView = (TextView)findViewById(R.id.viscosityTextView);
         mViscosityTextView.setText(randomText(this.getResources().getStringArray(R.array.viscosity)));
+
+        mMapButton = (Button)findViewById(R.id.mapButton);
+        mMapButton.setOnClickListener(mapButtonClickListener);
+
+
 //        randomText();
 //        mSummaryTextView.setText(randomText().toString());
 //        Toast.makeText(this, mSummaryTextView.getText(), Toast.LENGTH_SHORT).show();
@@ -82,6 +88,7 @@ public class BMSummary extends Activity {
 
         }
     };
+
 
     public String randomText() {
 
@@ -120,5 +127,13 @@ public class BMSummary extends Activity {
 
         }
     };
+
+    private OnClickListener mapButtonClickListener = (new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent mapIntent = new Intent(BMSummary.this, Locations.class);
+            BMSummary.this.startActivity(mapIntent);
+        }
+    });
 
 }

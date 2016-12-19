@@ -69,6 +69,10 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     private Button mSwitchCamera;
     private BMSummary bmSummary;
     private FrameLayout mFrameLayout;
+    private RelativeLayout mRelativeLayout;
+
+    private float oldXValue;
+    private float oldYValue;
 
     private ScaleGestureDetector mScaleDetector;
     private float mScaleFactor = 1.f;
@@ -137,6 +141,8 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     };
 
 
+
+
     //TODO: set stomach button to drag (code below)
 
     private View.OnDragListener mFrameLayoutDragListener = (new View.OnDragListener() {
@@ -174,6 +180,43 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
         @Override
         public boolean onTouch(View v, MotionEvent arg1) {
+            // TODO Auto-generated method stub
+            ClipData data = ClipData.newPlainText("", "");
+            View.DragShadowBuilder shadow = new View.DragShadowBuilder(mStomachImageButton);
+            v.startDrag(data, shadow, null, 0);
+            return false;
+        }
+    });
+
+    private View.OnLongClickListener mStomachButtonLongClickListener = (new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
+        }
+    });
+
+    private OnTouchListener mFrameLayoutTouchListener = (new OnTouchListener() {
+        @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    oldXValue = event.getX();
+                    oldYValue = event.getY();
+                    Log.i("Omid", "Action Down " + oldXValue + "," + oldYValue);
+                } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                    FrameLayout fl = (FrameLayout) findViewById(R.id.camera_frame);
+                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(v.getWidth(), v.getHeight());
+                    params.leftMargin = (int) (event.getRawX() - (v.getWidth() / 2));
+                    params.topMargin = (int) (event.getRawY() - (v.getHeight()));
+//                    v.getHeight(), (int) (event.getRawX() - (v.getWidth() / 2)), (int) (event.getRawY() - (v.getHeight()));
+                    v.setLayoutParams(params);
+                }
+                return true;
+            }
+    });
+
+    private View.OnDragListener mStomachButtonDragListener = (new View.OnDragListener() {
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
             // TODO Auto-generated method stub
             ClipData data = ClipData.newPlainText("", "");
             View.DragShadowBuilder shadow = new View.DragShadowBuilder(mStomachImageButton);
@@ -225,7 +268,9 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         mSwitchCamera.setOnClickListener(mSwitchCameraButtonClickListener);
 
         mFrameLayout = (FrameLayout)findViewById(R.id.camera_frame);
-//        mFrameLayout.setOnDragListener(mFrameLayoutDragListener);
+//        mFrameLayout.setOnTouchListener(mFrameLayoutTouchListener);
+
+        mRelativeLayout = (RelativeLayout)findViewById(R.id.relative_layout);
 
 
         mStomachImageButton = (ImageButton) findViewById(R.id.stomachButton);
@@ -419,6 +464,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         return true;
     }
 
+
     private void handleZoom(MotionEvent event, Camera.Parameters params) {
         int maxZoom = params.getMaxZoom();
 //        int minZoom = params.getMinZoom();
@@ -466,11 +512,21 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         return (float) Math.sqrt(x * x + y * y);
     }
 
-    public void swapImageButton() {
+    public void hideImageButton() {
         if(mStomachImageButton.isShown()) {
         mStomachImageButton.setVisibility(View.INVISIBLE);
         } else {
             mStomachImageButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void swapImageButton() {
+        if(mStomachImageButton == (ImageButton)findViewById(R.id.stomachButton)) {
+            mStomachImageButton = (ImageButton)findViewById(R.id.fartButton);
+            mFartImageButton = (ImageButton)findViewById(R.id.stomachButton);
+        } else {
+            mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
+            mFartImageButton = (ImageButton)findViewById(R.id.fartButton);
         }
     }
 

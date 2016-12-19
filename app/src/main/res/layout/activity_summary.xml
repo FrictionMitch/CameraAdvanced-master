@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/countdownTextView"
-            android:layout_toStartOf="@+id/countdownTextView"
+            android:layout_alignStart="@+id/countdown"
             android:layout_marginTop="32dp"
             android:id="@+id/expiry"
             android:textStyle="normal|bold"/>
@@ -84,8 +84,8 @@
             android:text="Estimated Weight Loss:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/girth"
-            android:layout_alignStart="@+id/girth"
+            android:layout_below="@+id/girthTextView"
+            android:layout_alignStart="@+id/countdown"
             android:layout_marginTop="44dp"
             android:id="@+id/weight"
             android:textStyle="normal|bold"/>
@@ -102,8 +102,8 @@
             android:text="Number of Flushes:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/weight"
-            android:layout_alignStart="@+id/weight"
+            android:layout_below="@+id/weightTextView"
+            android:layout_alignStart="@+id/countdown"
             android:layout_marginTop="62dp"
             android:id="@+id/flushes"
             android:textStyle="normal|bold"/>
@@ -120,8 +120,8 @@
             android:text="Viscosity:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/flushes"
-            android:layout_alignStart="@+id/flushes"
+            android:layout_below="@+id/flushesTextView"
+            android:layout_alignStart="@+id/countdown"
             android:layout_marginTop="37dp"
             android:id="@+id/viscosity"
             android:textStyle="normal|bold"/>
@@ -138,8 +138,9 @@
             android:text="Bottom Line:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/viscosity"
-            android:layout_alignStart="@+id/expiry"
+            android:layout_below="@+id/viscosityTextView"
+            android:layout_above="@+id/back_button"
+            android:layout_alignStart="@+id/countdown"
             android:layout_marginTop="39dp"
             android:id="@+id/bottomLine"
             android:textStyle="normal|bold"/>
@@ -156,8 +157,9 @@
             android:textStyle="normal|bold"
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:layout_above="@+id/back_button"
+            android:layout_toStartOf="@+id/bottomLine"
             />
+
 
 
 
@@ -175,9 +177,15 @@
             android:layout_alignParentEnd="true"
             android:onClick="showToast"/>
 
-
-
-
+        <Button
+            android:text="Find Underwear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/mapButton"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_alignEnd="@+id/flushesTextView"/>
 
 
 </RelativeLayout>
