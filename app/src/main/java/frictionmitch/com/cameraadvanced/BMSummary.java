@@ -3,9 +3,14 @@ package frictionmitch.com.cameraadvanced;
 
 import java.util.Random;
 
+import android.*;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -29,6 +34,11 @@ public class BMSummary extends Activity {
     private TextView mViscosityTextView;
     private Button mMapButton;
 
+    //--for GPS(Locations Activity)--
+    final private int REQUEST_COURSE_ACCESS = 123;
+    boolean permissionGranted = false;
+    LocationManager mLocationManager;
+    LocationListener mLocationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +76,29 @@ public class BMSummary extends Activity {
         mMapButton = (Button)findViewById(R.id.mapButton);
         mMapButton.setOnClickListener(mapButtonClickListener);
 
+        //--Locations(Map Activity)--
+        //--remove the location listener--
+//        if(ActivityCompat.checkSelfPermission(this,
+//
+//                android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                != PackageManager.PERMISSION_GRANTED &&
+//                ActivityCompat.checkSelfPermission(this,
+//                        android.Manifest.permission.ACCESS_COARSE_LOCATION)
+//                        != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this,
+//                    new String[] {
+//                            android.Manifest.permission.ACCESS_COARSE_LOCATION
+//                    },
+//                    REQUEST_COURSE_ACCESS);
+//            return;
+//        } else {
+//            permissionGranted = true;
+//        }
+//        if(permissionGranted) {
+//            mLocationManager.removeUpdates( mLocationListener);
+//        }
+    }
+
 
 //        randomText();
 //        mSummaryTextView.setText(randomText().toString());
@@ -76,7 +109,7 @@ public class BMSummary extends Activity {
 
 //        mBackImageButton = (ImageButton)findViewById(R.id.backImageButton);
 //        mBackImageButton.setOnClickListener(mBackButtonClickListener);
-    }
+
 
     private OnClickListener mBackButtonClickListener = new OnClickListener() {
         @Override
