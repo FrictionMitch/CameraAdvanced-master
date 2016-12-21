@@ -37,6 +37,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import static android.view.MotionEvent.INVALID_POINTER_ID;
+import static frictionmitch.com.cameraadvanced.R.mipmap.fart_shart;
+import static frictionmitch.com.cameraadvanced.R.mipmap.gut;
 
 
 public class CameraActivity extends Activity implements PictureCallback, SurfaceHolder.Callback {
@@ -66,6 +68,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     private boolean mIsCapturing;
     private float mDist;
     private int switchCount = 1;
+    private int swapCount = 0;
     private Button mSwitchCamera;
     private BMSummary bmSummary;
     private FrameLayout mFrameLayout;
@@ -109,12 +112,12 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         }
     };
 
-    private OnClickListener mHideImageButtonClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            hideFartButton();
-        }
-    };
+//    private OnClickListener mHideImageButtonClickListener = new OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            hideFartButton();
+//        }
+//    };
 
     private OnClickListener mHideFartImageButtonClickListener = new OnClickListener() {
 
@@ -312,6 +315,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 //        mHolder.setType(SurfaceHolder.SURFACE_TYPE_NORMAL);
 //    }
 
+
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
@@ -360,6 +364,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     @Override
     protected void onResume() {
         super.onResume();
+        mStomachImageButton.clearAnimation();
         callCamera();
         mCamera.setDisplayOrientation(90);
         mCamera.startPreview();
@@ -368,6 +373,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     @Override
     protected void onPause() {
         super.onPause();
+        mStomachImageButton.clearAnimation();
 
         if (mCamera != null) {
             mCamera.release();
@@ -521,22 +527,24 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     }
 
     public void swapImageButton() {
-        if(mStomachImageButton == (ImageButton)findViewById(R.id.stomachButton)) {
-            mStomachImageButton = (ImageButton)findViewById(R.id.fartButton);
-            mFartImageButton = (ImageButton)findViewById(R.id.stomachButton);
+        swapCount ++;
+        mStomachImageButton.setImageBitmap(null);
+        if(swapCount % 2 == 0) {
+            mStomachImageButton.setBackground(getDrawable(gut));
+            mFartImageButton.setBackground(getDrawable(fart_shart));
         } else {
-            mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
-            mFartImageButton = (ImageButton)findViewById(R.id.fartButton);
+            mStomachImageButton.setBackground(getDrawable(fart_shart));
+            mFartImageButton.setBackground(getDrawable(gut));
         }
     }
 
-    public void hideFartButton() {
-        if(mFartImageButton.isShown()) {
-            mFartImageButton.setVisibility(View.INVISIBLE);
-        } else {
-            mFartImageButton.setVisibility(View.VISIBLE);
-        }
-    }
+//    public void hideFartButton() {
+//        if(mFartImageButton.isShown()) {
+//            mFartImageButton.setVisibility(View.INVISIBLE);
+//        } else {
+//            mFartImageButton.setVisibility(View.VISIBLE);
+//        }
+//    }
 
     public void getCenter() {
 
@@ -550,9 +558,13 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     }
 
     public void scale() {
-        mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
-        mStomachImageButton.setImageResource(R.mipmap.gut);
         mStomachImageButton.clearAnimation();
+        mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
+        if(swapCount % 2 == 0) {
+            mStomachImageButton.setImageResource(gut);
+        } else {
+            mStomachImageButton.setImageResource(fart_shart);
+        }
 
         Animation scaleAnimation = AnimationUtils.loadAnimation(
                 getApplicationContext(), R.anim.scale_animation);

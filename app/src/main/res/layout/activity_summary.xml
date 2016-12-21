@@ -161,32 +161,25 @@
             />
 
 
-
-
         <Button
             android:id="@+id/back_button"
             android:text="Back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="false"
             android:layout_weight="0"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:onClick="showToast"/>
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
         <Button
             android:text="Find Gitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:id="@+id/mapButton"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_alignParentStart="true"
-            android:layout_alignEnd="@+id/flushesTextView"/>
+            android:layout_marginBottom="14dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

@@ -34,27 +34,27 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/gut"
             android:id="@+id/stomachButton"
             android:layout_gravity="bottom|center_horizontal"
             android:contentDescription="abdomin"
             android:alpha=".5"
-            android:background="@mipmap/gut"
             android:layout_marginBottom="130dp"
             android:scaleX="4.5"
             android:scaleY="3.5"
+            android:background="@mipmap/gut"
             />
+            <!--app:srcCompat="@mipmap/gut"-->
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/fart_shart"
             android:background="@mipmap/fart_shart"
             android:id="@+id/fartButton"
             android:paddingTop="20dp"
             android:paddingLeft="20dp"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"/>
+            <!--app:srcCompat="@mipmap/fart_shart"-->
 
         <Button
             android:id="@+id/capture_image_button"
