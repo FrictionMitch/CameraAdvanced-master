@@ -204,37 +204,37 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.capture_image_button).setOnClickListener(mCaptureImageButtonClickListener);
 
-        mSaveImageButton = (Button) findViewById(R.id.save_image_button);
-        mSaveImageButton.setOnClickListener(mSaveImageButtonClickListener);
-        mSaveImageButton.setEnabled(false);
+//        mSaveImageButton = (Button) findViewById(R.id.save_image_button);
+//        mSaveImageButton.setOnClickListener(mSaveImageButtonClickListener);
+//        mSaveImageButton.setEnabled(false);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == TAKE_PICTURE_REQUEST_B) {
-            if (resultCode == RESULT_OK) {
-                // Recycle the previous bitmap.
-                if (mCameraBitmap != null) {
-                    mCameraBitmap.recycle();
-                    mCameraBitmap = null;
-                }
-                Bundle extras = data.getExtras();
-                byte[] cameraData = extras.getByteArray(CameraActivity.EXTRA_CAMERA_DATA);
-                if (cameraData != null) {
-                    mCameraBitmap = BitmapFactory.decodeByteArray(cameraData, 0, cameraData.length);
-                    mCameraImageView.setImageBitmap(mCameraBitmap);
-                    mSaveImageButton.setEnabled(true);
-                }
-            } else {
-                mCameraBitmap = null;
-                mSaveImageButton.setEnabled(false);
-            }
-        }
-
-//        if(requestCode == COARSE_LOCATION_RESULT) {
-//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == TAKE_PICTURE_REQUEST_B) {
+//            if (resultCode == RESULT_OK) {
+//                // Recycle the previous bitmap.
+//                if (mCameraBitmap != null) {
+//                    mCameraBitmap.recycle();
+//                    mCameraBitmap = null;
+//                }
+//                Bundle extras = data.getExtras();
+//                byte[] cameraData = extras.getByteArray(CameraActivity.EXTRA_CAMERA_DATA);
+//                if (cameraData != null) {
+//                    mCameraBitmap = BitmapFactory.decodeByteArray(cameraData, 0, cameraData.length);
+//                    mCameraImageView.setImageBitmap(mCameraBitmap);
+//                    mSaveImageButton.setEnabled(true);
+//                }
+//            } else {
+//                mCameraBitmap = null;
+//                mSaveImageButton.setEnabled(false);
+//            }
 //        }
-    }
+//
+////        if(requestCode == COARSE_LOCATION_RESULT) {
+////
+////        }
+//    }
 
 
     private void startImageCapture() {

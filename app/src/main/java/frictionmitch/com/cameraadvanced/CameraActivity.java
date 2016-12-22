@@ -31,10 +31,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.app.ActionBar.LayoutParams;
+import android.widget.ViewSwitcher.ViewFactory;
 
 import static android.view.MotionEvent.INVALID_POINTER_ID;
 import static frictionmitch.com.cameraadvanced.R.mipmap.fart_shart;
@@ -80,6 +83,9 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     private ScaleGestureDetector mScaleDetector;
     private float mScaleFactor = 1.f;
     private float mLastTouch;
+    private ImageSwitcher sw;
+
+
 //    private SurfaceHolder mHolder;
 
 
@@ -289,13 +295,14 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
 
         // Click on "Snap Picure" button to do something...
-        mCaptureImageButton = (Button) findViewById(R.id.capture_image_button);
-        mCaptureImageButton.setOnClickListener(mCaptureImageButtonClickListener);
+//        mCaptureImageButton = (Button) findViewById(R.id.capture_image_button);
+//        mCaptureImageButton.setOnClickListener(mCaptureImageButtonClickListener);
 
-        final Button doneButton = (Button) findViewById(R.id.done_button);
-        doneButton.setOnClickListener(mDoneButtonClickListener);
+//        final Button doneButton = (Button) findViewById(R.id.done_button);
+//        doneButton.setOnClickListener(mDoneButtonClickListener);
 
         mIsCapturing = true;
+        introduceIcon();
 
 //        setupImageDisplay();
 
@@ -304,16 +311,6 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 //        mCamera.setDisplayOrientation(90);
     }
 
-//    public CameraView(Context context, Camera camera) {
-//        super(context);
-//
-//        mCamera = camera;
-//        mCamera.setDisplayOrientation(90);
-//        //get the holder and set this class as the callback, so we can get camera data here
-//        mHolder = getHolder();
-//        mHolder.addCallback(this);
-//        mHolder.setType(SurfaceHolder.SURFACE_TYPE_NORMAL);
-//    }
 
 
     @Override
@@ -365,6 +362,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     protected void onResume() {
         super.onResume();
         mStomachImageButton.clearAnimation();
+        introduceIcon();
         callCamera();
         mCamera.setDisplayOrientation(90);
         mCamera.startPreview();
@@ -532,10 +530,13 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         if(swapCount % 2 == 0) {
             mStomachImageButton.setBackground(getDrawable(gut));
             mFartImageButton.setBackground(getDrawable(fart_shart));
+            introduceIcon();
         } else {
             mStomachImageButton.setBackground(getDrawable(fart_shart));
             mFartImageButton.setBackground(getDrawable(gut));
+            introduceIcon();
         }
+
     }
 
 //    public void hideFartButton() {
@@ -553,7 +554,8 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         int DeviceTotalWidth = metrics.widthPixels;
         int DeviceTotalHeight = metrics.heightPixels;
 
-        LinearLayout LinearLayoutImageCenter=(LinearLayout) findViewById(R.id.linear_layout);
+//        LinearLayout LinearLayoutImageCenter=(LinearLayout) findViewById(R.id.linear_layout);
+        FrameLayout FrameLayoutImageCenter=(FrameLayout) findViewById(R.id.camera_frame);
         mStomachImageButton.setPadding(DeviceTotalWidth/4,DeviceTotalHeight/4,0,0);
     }
 
@@ -594,6 +596,16 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 //        scale.addAnimation(fadeAnimation);
 //        scale.addAnimation(reverseScaleAnimation);
         mStomachImageButton.startAnimation(scale);
+    }
+
+    public void introduceIcon() {
+        mStomachImageButton.clearAnimation();
+        Animation slideAnimation = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.slide);
+
+        AnimationSet slide = new AnimationSet(false);
+        slide.addAnimation(slideAnimation);
+        mStomachImageButton.startAnimation(slide);
     }
 
 
