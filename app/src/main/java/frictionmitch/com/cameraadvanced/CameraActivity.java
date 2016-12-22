@@ -129,6 +129,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
         @Override
         public void onClick(View v) {
+            exitIcon();
             swapImageButton();
         }
 
@@ -525,17 +526,17 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     }
 
     public void swapImageButton() {
-        swapCount ++;
+        exitIcon();
         mStomachImageButton.setImageBitmap(null);
+        swapCount ++;
         if(swapCount % 2 == 0) {
             mStomachImageButton.setBackground(getDrawable(gut));
             mFartImageButton.setBackground(getDrawable(fart_shart));
-            introduceIcon();
         } else {
             mStomachImageButton.setBackground(getDrawable(fart_shart));
             mFartImageButton.setBackground(getDrawable(gut));
-            introduceIcon();
         }
+        introduceIcon();
 
     }
 
@@ -562,6 +563,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     public void scale() {
         mStomachImageButton.clearAnimation();
         mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
+
         if(swapCount % 2 == 0) {
             mStomachImageButton.setImageResource(gut);
         } else {
@@ -599,13 +601,44 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     }
 
     public void introduceIcon() {
-        mStomachImageButton.clearAnimation();
+//        mStomachImageButton.setVisibility(View.INVISIBLE);
+//        mStomachImageButton.clearAnimation();
         Animation slideAnimation = AnimationUtils.loadAnimation(
                 getApplicationContext(), R.anim.slide);
+//        Animation reverseSlideAnimation = AnimationUtils.loadAnimation(
+//                getApplicationContext(), R.anim.slide_reverse);
 
         AnimationSet slide = new AnimationSet(false);
         slide.addAnimation(slideAnimation);
+//        slide.addAnimation(reverseSlideAnimation);
         mStomachImageButton.startAnimation(slide);
+    }
+
+    public void exitIcon(){
+//        mStomachImageButton.clearAnimation();
+//        mStomachImageButton.setVisibility(View.INVISIBLE);
+//        Animation slideAnimation = AnimationUtils.loadAnimation(
+//                getApplicationContext(), R.anim.slide);
+        Animation reverseSlideAnimation = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.slide_reverse);
+
+        AnimationSet reverse = new AnimationSet(false);
+        reverse.addAnimation(reverseSlideAnimation);
+//        slide.addAnimation(reverseSlideAnimation);
+        mStomachImageButton.startAnimation(reverse);
+//        onAnimationEnd(reverse);
+//        introduceIcon();
+    }
+
+    public void onAnimationEnd(Animation animation) {
+
+
+        Animation slideAnimation = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.slide);
+        AnimationSet slide = new AnimationSet(false);
+        slide.addAnimation(slideAnimation);
+        mStomachImageButton.startAnimation(slide);
+//        introduceIcon();
     }
 
 

@@ -85,6 +85,7 @@
             tools:ignore="HardcodedText"
             android:elevation="8dp"
             android:cropToPadding="true"
+            android:layout_above="@+id/gridLayout"
             android:layout_marginBottom="120dp"/>
 
         <ImageButton
@@ -97,6 +98,15 @@
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry"/>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:id="@+id/gridLayout"
+            >
+
+        </GridLayout>
 
         <ImageSwitcher
             android:layout_width="wrap_content"
