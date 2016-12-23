@@ -50,7 +50,7 @@ public class BMSummary extends Activity {
 
 
         mSummaryTextView = (TextView)findViewById(R.id.bottomLineTextView);
-        mSummaryTextView.setText(randomText());
+        mSummaryTextView.setText(randomText(this.getResources().getStringArray(R.array.heading)));
 
 //        mRandomTextView = (TextView)findViewById(R.id.countdownTextView);
 //        mRandomTextView.setText(randomCountdown());
@@ -72,6 +72,8 @@ public class BMSummary extends Activity {
 
         mViscosityTextView = (TextView)findViewById(R.id.viscosityTextView);
         mViscosityTextView.setText(randomText(this.getResources().getStringArray(R.array.viscosity)));
+
+
 
         mMapButton = (Button)findViewById(R.id.mapButton);
         mMapButton.setOnClickListener(mapButtonClickListener);

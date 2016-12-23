@@ -16,9 +16,10 @@
         <item>You are SCREWED!</item>
         <item>Lots of time</item>
         <item>Too late</item>
+        <item>I\'m going to be straight with you…it\'s over!  You\'ll have defacated by the time you read this. There\'s no going back from here so just own it.</item>
         <item>You are going to need a bath</item>
         <item>What the hell did you eat?</item>
-        <item>Forget new underwear...you are going to need a new toilet after this</item>
+        <item>Forget new underwear…you are going to need a new toilet after this</item>
     </string-array>
 
     <string-array name="countdown">
@@ -35,7 +36,7 @@
     </string-array>
 
     <string-array name="girth">
-        <item>ever see a pylon...yeah, it\'s going to be wider than the wide end</item>
+        <item>ever see a pylon…yeah, it\'s going to be wider than the wide end</item>
         <item>baby carrot</item>
         <item>curly fry</item>
         <item>banana</item>
@@ -44,6 +45,7 @@
     <string-array name="weight">
         <item>5 lbs</item>
         <item>half your current weight</item>
+        <item>8lbs, 7ounces…congrats, it\'s a boy</item>
         <item>25 lbs</item>
     </string-array>
 
@@ -51,7 +53,9 @@
         <item>5</item>
         <item>2</item>
         <item>1</item>
-        <item>none...better show this one off</item>
+        <item>40…hope you don\'t own a septic tank!</item>
+
+        <item>none…better show this one off</item>
     </string-array>
 
     <string-array name="viscosity">

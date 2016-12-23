@@ -3,6 +3,7 @@ package frictionmitch.com.cameraadvanced;
 import java.io.IOException;
 import java.util.List;
 
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -13,6 +14,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.animation.ValueAnimatorCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -39,6 +41,7 @@ import android.widget.Toast;
 import android.app.ActionBar.LayoutParams;
 import android.widget.ViewSwitcher.ViewFactory;
 
+import static android.R.attr.animation;
 import static android.view.MotionEvent.INVALID_POINTER_ID;
 import static frictionmitch.com.cameraadvanced.R.mipmap.fart_shart;
 import static frictionmitch.com.cameraadvanced.R.mipmap.gut;
@@ -129,7 +132,10 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
         @Override
         public void onClick(View v) {
-            exitIcon();
+//            exitIcon();
+            mStomachImageButton.clearAnimation();
+            mStomachImageButton.setVisibility(View.INVISIBLE);
+            mStomachImageButton.setImageBitmap(null);
             swapImageButton();
         }
 
@@ -526,15 +532,17 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     }
 
     public void swapImageButton() {
-        exitIcon();
+//        exitIcon();
         mStomachImageButton.setImageBitmap(null);
         swapCount ++;
         if(swapCount % 2 == 0) {
             mStomachImageButton.setBackground(getDrawable(gut));
             mFartImageButton.setBackground(getDrawable(fart_shart));
+            mStomachImageButton.setVisibility(View.VISIBLE);
         } else {
             mStomachImageButton.setBackground(getDrawable(fart_shart));
             mFartImageButton.setBackground(getDrawable(gut));
+            mStomachImageButton.setVisibility(View.VISIBLE);
         }
         introduceIcon();
 
