@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/relative_layout"
-    >
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+                <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                <!--xmlns:tools="http://schemas.android.com/tools"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:id="@+id/relative_layout"-->
+                <!--&gt;-->
 <!--<LinearLayout-->
               <!--android:orientation="vertical"-->
               <!--android:layout_width="match_parent"-->
@@ -15,27 +15,27 @@
               <!--tools:ignore="UselessParent">-->
 
     <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
         android:id="@+id/camera_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
         tools:ignore="ObsoleteLayoutParam,UselessParent">
+
 
         <ImageView
             android:id="@+id/camera_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription=""
-            tools:ignore="ContentDescription"/>
+            android:contentDescription=""/>
 
         <SurfaceView
             android:id="@+id/preview_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <!--app:srcCompat="@mipmap/gut"-->
-
-
+            android:layout_height="match_parent"
+            />
 
         <Button
             android:id="@+id/capture_image_button"
@@ -61,6 +61,7 @@
             android:layout_gravity="bottom"
             />
 
+
         <Button
             android:id="@+id/switch_camera"
             android:text="@string/switch_camera"
@@ -71,22 +72,22 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/stomachButton"
-            android:layout_gravity="bottom|center"
-            android:contentDescription="abdomin"
-            android:alpha=".5"
-            android:scaleX="4"
-            android:scaleY="4"
-            android:background="@mipmap/gut"
-            android:layout_weight="10"
-            tools:ignore="HardcodedText"
-            android:elevation="8dp"
-            android:cropToPadding="true"
-            android:layout_above="@+id/gridLayout"
-            android:layout_marginBottom="120dp"/>
+        <!--<ImageButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/stomachButton"-->
+            <!--android:layout_gravity="bottom|center"-->
+            <!--android:contentDescription="abdomin"-->
+            <!--android:alpha=".5"-->
+            <!--android:scaleX="4"-->
+            <!--android:scaleY="4"-->
+            <!--android:layout_weight="10"-->
+            <!--tools:ignore="HardcodedText"-->
+            <!--android:elevation="8dp"-->
+            <!--android:cropToPadding="true"-->
+            <!--android:layout_above="@+id/gridLayout"-->
+            <!--android:layout_marginBottom="120dp"/>-->
+            <!--android:background="@mipmap/gut"-->
 
         <ImageButton
                 android:layout_width="wrap_content"
@@ -99,28 +100,20 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry"/>
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="bottom"
-            android:id="@+id/gridLayout"
-            >
+    <ImageSwitcher
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageSwitcher"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center"
+        android:alpha=".5"
+        android:scaleX="4"
+        android:scaleY="4"
+        android:layout_marginBottom="150dp"
+        android:animateFirstView="true"/>
 
-        </GridLayout>
-
-        <ImageSwitcher
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageSwitcher"
-            android:layout_above="@+id/textView"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="150dp"
-            />
-
-        <!--app:srcCompat="@mipmap/fart_shart"-->
 
     </FrameLayout>
 
 <!--</LinearLayout>-->
-</RelativeLayout>
+<!--</RelativeLayout>-->

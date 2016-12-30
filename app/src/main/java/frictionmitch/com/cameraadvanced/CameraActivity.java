@@ -3,10 +3,8 @@ package frictionmitch.com.cameraadvanced;
 import java.io.IOException;
 import java.util.List;
 
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.ClipData;
-import android.content.ClipDescription;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,8 +12,6 @@ import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.animation.ValueAnimatorCompat;
-import android.support.v4.view.MotionEventCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.DragEvent;
@@ -26,7 +22,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
@@ -35,16 +30,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.app.ActionBar.LayoutParams;
 import android.widget.ViewSwitcher.ViewFactory;
 
-import static android.R.attr.animation;
 import static android.view.MotionEvent.INVALID_POINTER_ID;
-import static frictionmitch.com.cameraadvanced.R.mipmap.fart_shart;
-import static frictionmitch.com.cameraadvanced.R.mipmap.gut;
+//import static frictionmitch.com.cameraadvanced.R.mipmap.fart_shart;
+//import static frictionmitch.com.cameraadvanced.R.mipmap.gut;
 
 
 public class CameraActivity extends Activity implements PictureCallback, SurfaceHolder.Callback {
@@ -86,7 +79,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     private ScaleGestureDetector mScaleDetector;
     private float mScaleFactor = 1.f;
     private float mLastTouch;
-    private ImageSwitcher sw;
+    private ImageSwitcher mImageSwitcher;
 
 
 //    private SurfaceHolder mHolder;
@@ -128,14 +121,14 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 //        }
 //    };
 
-    private OnClickListener mHideFartImageButtonClickListener = new OnClickListener() {
+    private OnClickListener mSwapImageClickListener = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
 //            exitIcon();
-            mStomachImageButton.clearAnimation();
-            mStomachImageButton.setVisibility(View.INVISIBLE);
-            mStomachImageButton.setImageBitmap(null);
+//            mStomachImageButton.clearAnimation();
+//            mStomachImageButton.setVisibility(View.INVISIBLE);
+//            mStomachImageButton.setImageBitmap(null);
             swapImageButton();
         }
 
@@ -263,6 +256,22 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         }
     };
 
+    private OnClickListener mImageSwitcherClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            scale();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(CameraActivity.this, BMSummary.class);
+                    CameraActivity.this.startActivity(intent);
+                    mCamera.release();
+                    mCamera = null;
+                }
+            }, 4000);
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -286,11 +295,13 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         mFrameLayout = (FrameLayout)findViewById(R.id.camera_frame);
 //        mFrameLayout.setOnTouchListener(mFrameLayoutTouchListener);
 
-        mRelativeLayout = (RelativeLayout)findViewById(R.id.relative_layout);
+//        mRelativeLayout = (RelativeLayout)findViewById(R.id.relative_layout);
 
 
-        mStomachImageButton = (ImageButton) findViewById(R.id.stomachButton);
-        mStomachImageButton.setOnClickListener(mStomachButtonClickListener);
+//        mStomachImageButton = (ImageButton) findViewById(R.id.stomachButton);
+//        mStomachImageButton.setImageBitmap(null);
+//        mStomachImageButton.setVisibility(View.INVISIBLE);
+//        mStomachImageButton.setOnClickListener(mStomachButtonClickListener);
 //        mStomachImageButton.setOnLongClickListener(mStomachButtonLongClickListener);
 //        mStomachImageButton.setOnDragListener(mStomachButtonDragListener);
 //        mStomachImageButton.setOnTouchListener(mStomachButtonTouchListener);
@@ -298,24 +309,58 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 //        mStomachImageButton.setOnClickListener(mHideImageButtonClickListener);
 
         mFartImageButton = (ImageButton) findViewById(R.id.fartButton);
-        mFartImageButton.setOnClickListener(mHideFartImageButtonClickListener);
+        mFartImageButton.setOnClickListener(mSwapImageClickListener);
 
 
         // Click on "Snap Picure" button to do something...
 //        mCaptureImageButton = (Button) findViewById(R.id.capture_image_button);
 //        mCaptureImageButton.setOnClickListener(mCaptureImageButtonClickListener);
 
-//        final Button doneButton = (Button) findViewById(R.id.done_button);
-//        doneButton.setOnClickListener(mDoneButtonClickListener);
+        final Button doneButton = (Button) findViewById(R.id.done_button);
+        doneButton.setOnClickListener(mDoneButtonClickListener);
 
         mIsCapturing = true;
-        introduceIcon();
+//        introduceIcon();
+        mImageSwitcher = (ImageSwitcher)findViewById(R.id.imageSwitcher);
+        mImageSwitcher.setOnClickListener(mImageSwitcherClickListener);
+//        mImageSwitcher.setImageResource(R.mipmap.gut);
+
+        mImageSwitcher.setFactory(new ViewFactory() {
+            @Override
+            public View makeView() {
+                ImageView view = new ImageView(getApplicationContext());
+                view.setScaleType(ImageView.ScaleType.CENTER);
+                view.setLayoutParams(new
+                        ImageSwitcher.LayoutParams(LayoutParams.WRAP_CONTENT,
+                        LayoutParams.WRAP_CONTENT));
+                view.setImageResource(R.mipmap.gut);
+                return view;
+
+            }
+        });
+//        mImageSwitcher.clearAnimation();
+        mImageSwitcher.setInAnimation(this, R.anim.slide);
+        mImageSwitcher.setOutAnimation(this, R.anim.slide_reverse);
+        mImageSwitcher.setImageResource(R.mipmap.gut);
+
+//        swapImageButton();
+//        mImageSwitcher.setVisibility(View.VISIBLE);
+//        mImageSwitcher.setImageResource(R.mipmap.gut);
+//        mImageSwitcher.setInAnimation(this, R.anim.slide);
+//        introduceIcon();
+//        mImageSwitcher.setInAnimation(this, R.anim.slide);
 
 //        setupImageDisplay();
 
 //        callCamera();
 
-//        mCamera.setDisplayOrientation(90);
+//        mCamera.setDisplayOrientation(90);Animation animationOut = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+//        Animation animationIn = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+//        Animation animationOut = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+//
+//        mImageSwitcher.setImageResource(R.mipmap.gut);
+//        mImageSwitcher.setInAnimation(animationIn);
+//        mImageSwitcher.setOutAnimation(animationOut);
     }
 
 
@@ -355,12 +400,16 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         if (switchCount % 2 == 0) {
 //            mStomachImageButton.setPadding(0, 0, 0, pixelsToDp(200));
 //            mStomachImageButton.setLayoutParams();
-            mStomachImageButton.setScaleX(2f);
-            mStomachImageButton.setScaleY(1.5f);
+//            mStomachImageButton.setScaleX(2f);
+//            mStomachImageButton.setScaleY(1.5f);
+            mImageSwitcher.setScaleX(2f);
+            mImageSwitcher.setScaleY(2f);
 //            getCenter();
         } else {
-            mStomachImageButton.setScaleX(5);
-            mStomachImageButton.setScaleY(4);
+//            mStomachImageButton.setScaleX(4);
+//            mStomachImageButton.setScaleY(4);
+            mImageSwitcher.setScaleX(4);
+            mImageSwitcher.setScaleY(4);
 //            mStomachImageButton.setPadding(0, 0, 0, pixelsToDp(120));
         }
     }
@@ -368,17 +417,20 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     @Override
     protected void onResume() {
         super.onResume();
-        mStomachImageButton.clearAnimation();
-        introduceIcon();
+//        mStomachImageButton.clearAnimation();
+//        introduceIcon();
         callCamera();
         mCamera.setDisplayOrientation(90);
         mCamera.startPreview();
+//        mImageSwitcher.setImageResource(R.mipmap.gut);
+        mImageSwitcher.setInAnimation(this, R.anim.slide);
+        mImageSwitcher.setOutAnimation(this, R.anim.slide_reverse);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mStomachImageButton.clearAnimation();
+//        mImageSwitcher.clearAnimation();
 
         if (mCamera != null) {
             mCamera.release();
@@ -533,18 +585,23 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
     public void swapImageButton() {
 //        exitIcon();
-        mStomachImageButton.setImageBitmap(null);
+//        mStomachImageButton.setImageBitmap(null);
         swapCount ++;
         if(swapCount % 2 == 0) {
-            mStomachImageButton.setBackground(getDrawable(gut));
-            mFartImageButton.setBackground(getDrawable(fart_shart));
-            mStomachImageButton.setVisibility(View.VISIBLE);
+//            mStomachImageButton.setBackground(getDrawable(gut));
+            mFartImageButton.setBackground(getDrawable(R.mipmap.fart_shart));
+//            mStomachImageButton.setVisibility(View.VISIBLE);
+            mImageSwitcher.setImageResource(R.mipmap.gut);
+        mImageSwitcher.setInAnimation(this, R.anim.slide);
         } else {
-            mStomachImageButton.setBackground(getDrawable(fart_shart));
-            mFartImageButton.setBackground(getDrawable(gut));
-            mStomachImageButton.setVisibility(View.VISIBLE);
+//            mStomachImageButton.setBackground(getDrawable(fart_shart));
+            mFartImageButton.setBackground(getDrawable(R.mipmap.gut));
+//            mStomachImageButton.setVisibility(View.VISIBLE);
+            mImageSwitcher.setImageResource(R.mipmap.fart_shart);
+        mImageSwitcher.setInAnimation(this, R.anim.slide);
         }
-        introduceIcon();
+//        mImageSwitcher.setOutAnimation(this, R.anim.slide_reverse);
+//        introduceIcon();
 
     }
 
@@ -569,14 +626,17 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     }
 
     public void scale() {
-        mStomachImageButton.clearAnimation();
-        mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
+//        mStomachImageButton.clearAnimation();
+        mImageSwitcher.clearAnimation();
+//        mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
 
-        if(swapCount % 2 == 0) {
-            mStomachImageButton.setImageResource(gut);
-        } else {
-            mStomachImageButton.setImageResource(fart_shart);
-        }
+//        if(swapCount % 2 == 0) {
+////            mStomachImageButton.setImageResource(gut);
+//            mImageSwitcher.setImageResource(gut);
+//        } else {
+////            mStomachImageButton.setImageResource(fart_shart);
+//            mImageSwitcher.setImageResource(fart_shart);
+//        }
 
         Animation scaleAnimation = AnimationUtils.loadAnimation(
                 getApplicationContext(), R.anim.scale_animation);
@@ -605,7 +665,8 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 //        scale.addAnimation(blinkAnimation);
 //        scale.addAnimation(fadeAnimation);
 //        scale.addAnimation(reverseScaleAnimation);
-        mStomachImageButton.startAnimation(scale);
+//        mStomachImageButton.startAnimation(scale);
+        mImageSwitcher.startAnimation(scale);
     }
 
     public void introduceIcon() {
@@ -619,7 +680,14 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         AnimationSet slide = new AnimationSet(false);
         slide.addAnimation(slideAnimation);
 //        slide.addAnimation(reverseSlideAnimation);
-        mStomachImageButton.startAnimation(slide);
+//        mStomachImageButton.startAnimation(slide);
+        mImageSwitcher.startAnimation(slide);
+    }
+
+    public void animations() {
+        Animation in = AnimationUtils.loadAnimation(this,android.R.anim.slide_in_left);
+        mImageSwitcher.setInAnimation(in);
+//        mImageSwitcher.setOutAnimation(out);
     }
 
     public void exitIcon(){

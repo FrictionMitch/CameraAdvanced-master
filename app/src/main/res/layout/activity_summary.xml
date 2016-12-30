@@ -132,6 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/viscosity"
             android:layout_toEndOf="@+id/viscosity"
+            android:layout_above="@+id/bottomLine"
             android:layout_marginStart="@dimen/activity_horizontal_margin"/>
 
         <TextView
@@ -161,23 +162,28 @@
 
 
         <Button
-            android:id="@+id/back_button"
-            android:text="Back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"/>
-
-        <Button
             android:text="Find Gitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/mapButton"
             android:layout_marginBottom="14dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:elevation="16dp"/>
+
+        <Button
+            android:id="@+id/back_button"
+            android:text="Back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:elevation="8dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:minWidth="60dip"
+            android:background="@android:color/holo_red_dark"
+            android:minHeight="34dp"/>
 
 
 </RelativeLayout>
