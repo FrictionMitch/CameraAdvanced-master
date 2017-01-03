@@ -30,7 +30,7 @@
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:id="@+id/countdown"
             android:layout_below="@+id/summary"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/title_gap"
             android:textStyle="normal|bold"/>
 
         <TextView
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/countdownTextView"
             android:layout_alignStart="@+id/countdown"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/vertical_gap"
             android:id="@+id/expiry"
             android:textStyle="normal|bold"/>
 
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/expiryTextView"
             android:layout_alignStart="@+id/countdown"
-            android:layout_marginTop="41dp"
+            android:layout_marginTop="@dimen/vertical_gap"
             android:id="@+id/girth"
             android:textStyle="normal|bold"/>
 
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/girthTextView"
             android:layout_alignStart="@+id/countdown"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="@dimen/vertical_gap"
             android:id="@+id/weight"
             android:textStyle="normal|bold"/>
 
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/weightTextView"
             android:layout_alignStart="@+id/countdown"
-            android:layout_marginTop="62dp"
+            android:layout_marginTop="@dimen/vertical_gap"
             android:id="@+id/flushes"
             android:textStyle="normal|bold"/>
 
@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/flushesTextView"
             android:layout_alignStart="@+id/countdown"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="@dimen/vertical_gap"
             android:id="@+id/viscosity"
             android:textStyle="normal|bold"/>
 

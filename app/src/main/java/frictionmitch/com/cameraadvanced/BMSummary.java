@@ -50,7 +50,7 @@ public class BMSummary extends Activity {
 
 
         mSummaryTextView = (TextView)findViewById(R.id.bottomLineTextView);
-        mSummaryTextView.setText(randomText(this.getResources().getStringArray(R.array.heading)));
+        mSummaryTextView.setText(randomText(this.getResources().getStringArray(R.array.bottomline)));
 
 //        mRandomTextView = (TextView)findViewById(R.id.countdownTextView);
 //        mRandomTextView.setText(randomCountdown());
@@ -127,7 +127,7 @@ public class BMSummary extends Activity {
 
     public String randomText() {
 
-        String[] array = this.getResources().getStringArray(R.array.heading);
+        String[] array = this.getResources().getStringArray(R.array.bottomline);
         String randomHeading = array[new Random().nextInt(array.length)];
 
         return randomHeading;

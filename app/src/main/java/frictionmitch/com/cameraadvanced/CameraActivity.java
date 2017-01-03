@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
@@ -333,7 +334,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
                 view.setLayoutParams(new
                         ImageSwitcher.LayoutParams(LayoutParams.WRAP_CONTENT,
                         LayoutParams.WRAP_CONTENT));
-                view.setImageResource(R.mipmap.gut);
+//                view.setImageResource(R.mipmap.gut);
                 return view;
 
             }
