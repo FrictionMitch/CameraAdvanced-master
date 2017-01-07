@@ -5,8 +5,9 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
@@ -80,7 +81,13 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     private ScaleGestureDetector mScaleDetector;
     private float mScaleFactor = 1.f;
     private float mLastTouch;
+
     private ImageSwitcher mImageSwitcher;
+    private static int mImageMain;
+    private static int mImageSecondary;
+
+    public static final String PREFERENCES = "Prefs";
+    SharedPreferences mSharedPreferences;
 
 
 //    private SurfaceHolder mHolder;
@@ -280,6 +287,8 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 
         setContentView(R.layout.activity_camera);
 
+        mImageMain = R.mipmap.gut;
+        mImageSecondary = R.mipmap.fart_shart;
 
         mCameraImage = (ImageView) findViewById(R.id.camera_image_view);
         mCameraImage.setVisibility(View.INVISIBLE);
@@ -342,7 +351,8 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 //        mImageSwitcher.clearAnimation();
         mImageSwitcher.setInAnimation(this, R.anim.slide);
         mImageSwitcher.setOutAnimation(this, R.anim.slide_reverse);
-        mImageSwitcher.setImageResource(R.mipmap.gut);
+//        mImageSwitcher.setImageResource(R.mipmap.gut);
+        mImageSwitcher.setImageResource(mImageMain);
 
 //        swapImageButton();
 //        mImageSwitcher.setVisibility(View.VISIBLE);
@@ -418,6 +428,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     @Override
     protected void onResume() {
         super.onResume();
+//        loadImageState();
 //        mStomachImageButton.clearAnimation();
 //        introduceIcon();
         callCamera();
@@ -426,6 +437,43 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
 //        mImageSwitcher.setImageResource(R.mipmap.gut);
         mImageSwitcher.setInAnimation(this, R.anim.slide);
         mImageSwitcher.setOutAnimation(this, R.anim.slide_reverse);
+
+
+    }
+
+    public void saveImageState() {
+        int getImageMain = mImageMain;
+        int getImageSecondary = mImageSecondary;
+//        SharedPreferences.Editor editor = mSharedPreferences.edit();
+
+        SharedPreferences sp = getSharedPreferences(PREFERENCES, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("main", getImageMain);
+        editor.putInt("secondary", getImageSecondary);
+        editor.commit();
+    }
+
+    public void loadImageState() {
+        //--Return values saved in the SharedPreferences--
+//        mSharedPreferences = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+////        int restoredMain = getSharedPreferences("main", )
+//
+//        SharedPreferences mSharedPreferences = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+//        String restoredText = mSharedPreferences.getString("text", null);
+//        if (restoredText != null) {
+//            String name = mSharedPreferences.getString("name", "No name defined");//"No name defined" is the default value.
+//            int main = mSharedPreferences.getInt("main", 0); //0 is the default value.
+//            int secondary = mSharedPreferences.getInt("secondary", 0);
+//        }
+
+        SharedPreferences sp = getSharedPreferences(PREFERENCES, Activity.MODE_PRIVATE);
+//            String restoredText = mSharedPreferences.getString("text", null);
+            int restoredMain = sp.getInt("main", -1);
+            if (restoredMain != -1) {
+                int main = mSharedPreferences.getInt("main", 0); //0 is the default value.
+                int secondary = mSharedPreferences.getInt("secondary", 0);
+            }
+//        int myIntValue = sp.getInt("your_int_key", -1);
     }
 
     @Override
@@ -437,6 +485,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
             mCamera.release();
             mCamera = null;
         }
+        saveImageState();
     }
 
     @Override
@@ -590,19 +639,29 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         swapCount ++;
         if(swapCount % 2 == 0) {
 //            mStomachImageButton.setBackground(getDrawable(gut));
-            mFartImageButton.setBackground(getDrawable(R.mipmap.fart_shart));
+            mImageMain = R.mipmap.gut;
+            mImageSecondary = R.mipmap.fart_shart;
+//            mFartImageButton.setBackground(getDrawable(R.mipmap.fart_shart));
 //            mStomachImageButton.setVisibility(View.VISIBLE);
-            mImageSwitcher.setImageResource(R.mipmap.gut);
-        mImageSwitcher.setInAnimation(this, R.anim.slide);
+//            mImageSwitcher.setImageResource(R.mipmap.gut);
         } else {
+            mImageMain = R.mipmap.fart_shart;
+            mImageSecondary = R.mipmap.gut;
 //            mStomachImageButton.setBackground(getDrawable(fart_shart));
-            mFartImageButton.setBackground(getDrawable(R.mipmap.gut));
+//            mFartImageButton.setBackground(getDrawable(mImageMain));
+//            mFartImageButton.setBackground(getDrawable(R.mipmap.gut));
 //            mStomachImageButton.setVisibility(View.VISIBLE);
-            mImageSwitcher.setImageResource(R.mipmap.fart_shart);
-        mImageSwitcher.setInAnimation(this, R.anim.slide);
+//            mImageSwitcher.setImageResource(mImageSecondary);
+//            mImageSwitcher.setImageResource(R.mipmap.fart_shart);
+//        mImageSwitcher.setInAnimation(this, R.anim.slide);
         }
+            mFartImageButton.setBackground(getDrawable(mImageSecondary));
 //        mImageSwitcher.setOutAnimation(this, R.anim.slide_reverse);
+            mImageSwitcher.setImageResource(mImageMain);
+
+        saveImageState();
 //        introduceIcon();
+        mImageSwitcher.setInAnimation(this, R.anim.slide);
 
     }
 

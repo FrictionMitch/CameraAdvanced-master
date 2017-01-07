@@ -37,6 +37,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
+import com.google.android.gms.maps.model.MapStyleOptions;
 
 import static android.R.attr.type;
 import static frictionmitch.com.cameraadvanced.R.id.map;
@@ -198,6 +199,18 @@ public class Locations extends AppCompatActivity implements
      */
     @Override
     public void onMapReady(GoogleMap map) {
+
+        // Customise the styling of the base map using a JSON object defined
+        // in a string resource file. First create a MapStyleOptions object
+        // from the JSON styles string, then pass this to the setMapStyle
+        // method of the GoogleMap object.
+        boolean success = map.setMapStyle(new MapStyleOptions(getResources()
+                .getString(R.string.style_json)));
+
+        if (!success) {
+            Log.e(TAG, "Style parsing failed.");
+        }
+
         mMap = map;
         map.setOnPoiClickListener(this);
 
