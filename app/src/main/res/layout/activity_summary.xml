@@ -18,7 +18,7 @@
             android:layout_centerInParent="false"
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
-            android:paddingTop="@dimen/activity_vertical_margin"/>
+            android:paddingTop="@dimen/indent"/>
 
 
 
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/indent"
             android:id="@+id/countdown"
             android:layout_below="@+id/summary"
             android:layout_marginTop="@dimen/title_gap"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/countdownTextView"
             android:layout_alignStart="@+id/countdown"
-            android:layout_marginTop="@dimen/vertical_gap"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:id="@+id/expiry"
             android:textStyle="normal|bold"/>
 
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/countdownTextView"
             android:layout_toEndOf="@+id/expiry"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:id="@+id/expiryTextView"
             android:layout_marginStart="@dimen/activity_horizontal_margin"/>
 
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/expiryTextView"
             android:layout_alignStart="@+id/countdown"
-            android:layout_marginTop="@dimen/vertical_gap"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:id="@+id/girth"
             android:textStyle="normal|bold"/>
 
@@ -76,17 +76,35 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/girth"
             android:layout_toEndOf="@+id/girth"
-            android:layout_marginBottom="12dp"
             android:id="@+id/girthTextView"
             android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+            android:text="Air Quality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/girthTextView"
+            android:layout_alignStart="@+id/countdown"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:id="@+id/airQuality"
+            android:textStyle="normal|bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/airQuality"
+            android:layout_toEndOf="@+id/airQuality"
+            android:id="@+id/airQualityTextView"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+
 
         <TextView
             android:text="Estimated Weight Loss:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/girthTextView"
+            android:layout_below="@+id/airQualityTextView"
             android:layout_alignStart="@+id/countdown"
-            android:layout_marginTop="@dimen/vertical_gap"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:id="@+id/weight"
             android:textStyle="normal|bold"/>
 
@@ -96,7 +114,7 @@
             android:layout_alignTop="@+id/weight"
             android:layout_toEndOf="@+id/weight"
             android:id="@+id/weightTextView"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+            android:layout_marginStart="@dimen/indent"/>
 
         <TextView
             android:text="Number of Flushes:"
@@ -104,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/weightTextView"
             android:layout_alignStart="@+id/countdown"
-            android:layout_marginTop="@dimen/vertical_gap"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:id="@+id/flushes"
             android:textStyle="normal|bold"/>
 
@@ -114,7 +132,7 @@
             android:layout_alignTop="@+id/flushes"
             android:layout_toEndOf="@+id/flushes"
             android:id="@+id/flushesTextView"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+            android:layout_marginStart="@dimen/indent"/>
 
         <TextView
             android:text="Viscosity:"
@@ -122,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/flushesTextView"
             android:layout_alignStart="@+id/countdown"
-            android:layout_marginTop="@dimen/vertical_gap"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:id="@+id/viscosity"
             android:textStyle="normal|bold"/>
 
@@ -133,7 +151,7 @@
             android:layout_alignTop="@+id/viscosity"
             android:layout_toEndOf="@+id/viscosity"
             android:layout_above="@+id/bottomLine"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+            android:layout_marginStart="@dimen/indent"/>
 
         <TextView
             android:text="Bottom Line:"
@@ -151,12 +169,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/indent"
             android:typeface="normal"
             android:textStyle="normal|bold"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingBottom="20dp"
+            android:paddingStart="@dimen/indent"
+            android:paddingEnd="@dimen/indent"
+            android:paddingBottom="@dimen/title_gap"
             android:layout_above="@+id/mapButton"
             />
 
@@ -166,10 +184,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/mapButton"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="10dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:elevation="16dp"/>
+            />
 
         <Button
             android:id="@+id/back_button"

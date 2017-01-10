@@ -46,6 +46,14 @@
         <item>banana</item>
     </string-array>
 
+
+    <string-array name="air">
+        <item>at least 2 blasts of fabreze</item>
+        <item>integrity compromised…the room won\'t be hospitable for the next 150 years</item>
+        <item>take the can of air freshener and let it rain</item>
+        <item>forget lighting a match…you are better off just burning down the house</item>
+    </string-array>
+
     <string-array name="weight">
         <item>5 lbs</item>
         <item>half your current weight</item>

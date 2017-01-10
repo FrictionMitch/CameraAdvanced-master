@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -69,7 +68,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     private boolean mIsCapturing;
     private float mDist;
     private int switchCount = 1;
-    private int swapCount = 0;
+    public static int mSwapCount = 0;
     private Button mSwitchCamera;
     private BMSummary bmSummary;
     private FrameLayout mFrameLayout;
@@ -83,7 +82,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     private float mLastTouch;
 
     private ImageSwitcher mImageSwitcher;
-    private static int mImageMain;
+    public static int mImageMain;
     private static int mImageSecondary;
 
     public static final String PREFERENCES = "Prefs";
@@ -636,8 +635,8 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
     public void swapImageButton() {
 //        exitIcon();
 //        mStomachImageButton.setImageBitmap(null);
-        swapCount ++;
-        if(swapCount % 2 == 0) {
+        mSwapCount++;
+        if(mSwapCount % 2 == 0) {
 //            mStomachImageButton.setBackground(getDrawable(gut));
             mImageMain = R.mipmap.gut;
             mImageSecondary = R.mipmap.fart_shart;
@@ -690,7 +689,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
         mImageSwitcher.clearAnimation();
 //        mStomachImageButton = (ImageButton)findViewById(R.id.stomachButton);
 
-//        if(swapCount % 2 == 0) {
+//        if(mSwapCount % 2 == 0) {
 ////            mStomachImageButton.setImageResource(gut);
 //            mImageSwitcher.setImageResource(gut);
 //        } else {

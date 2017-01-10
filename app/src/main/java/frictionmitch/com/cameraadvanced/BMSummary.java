@@ -18,17 +18,22 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static frictionmitch.com.cameraadvanced.CameraActivity.mImageMain;
+import static frictionmitch.com.cameraadvanced.CameraActivity.mSwapCount;
+
 public class BMSummary extends Activity {
 
 //    private static final int TAKE_PICTURE_REQUEST_B = 100;
 
     private Button mBackButton;
     private ImageButton mBackImageButton;
+    private TextView mSummary;
     private TextView mSummaryTextView;
     private TextView mRandomTextView;
     private TextView mCountdownTextView;
     private TextView mExpiryTextView;
     private TextView mGirthTextView;
+    private TextView mAirQualityTextView;
     private TextView mWeightTextView;
     private TextView mFlushesTextView;
     private TextView mViscosityTextView;
@@ -48,6 +53,7 @@ public class BMSummary extends Activity {
         mBackButton.setOnClickListener(mBackButtonClickListener);
 
 
+        mSummary = (TextView)findViewById(R.id.summary);
 
         mSummaryTextView = (TextView)findViewById(R.id.bottomLineTextView);
         mSummaryTextView.setText(randomText(this.getResources().getStringArray(R.array.bottomline)));
@@ -63,6 +69,9 @@ public class BMSummary extends Activity {
 
         mGirthTextView = (TextView)findViewById(R.id.girthTextView);
         mGirthTextView.setText(randomText(this.getResources().getStringArray(R.array.girth)));
+
+        mAirQualityTextView = (TextView)findViewById(R.id.airQualityTextView);
+        mAirQualityTextView.setText(randomText(this.getResources().getStringArray(R.array.air)));
 
         mWeightTextView = (TextView)findViewById(R.id.weightTextView);
         mWeightTextView.setText(randomText(this.getResources().getStringArray(R.array.weight)));
@@ -99,6 +108,7 @@ public class BMSummary extends Activity {
 //        if(permissionGranted) {
 //            mLocationManager.removeUpdates( mLocationListener);
 //        }
+        checkText();
     }
 
 
@@ -123,6 +133,21 @@ public class BMSummary extends Activity {
 
         }
     };
+
+    public void checkText() {
+//        if (mImageMain == R.mipmap.fart_shart) {
+//            mSummary.setText("Eat shit");
+//        }
+
+        switch (mImageMain) {
+            case (R.mipmap.gut):
+                mSummary.setText("BM Summary");
+                break;
+            case(R.mipmap.fart_shart):
+                mSummary.setText("Shit or fffffffffftttt");
+                break;
+        }
+    }
 
 
     public String randomText() {
