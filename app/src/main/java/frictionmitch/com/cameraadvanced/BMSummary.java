@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,6 +39,8 @@ public class BMSummary extends Activity {
     private TextView mFlushesTextView;
     private TextView mViscosityTextView;
     private Button mMapButton;
+    private CountDownTimer mCountDownTimer;
+    private int mTimer;
 
     //--for GPS(Locations Activity)--
     final private int REQUEST_COURSE_ACCESS = 123;
@@ -86,6 +89,16 @@ public class BMSummary extends Activity {
 
         mMapButton = (Button)findViewById(R.id.mapButton);
         mMapButton.setOnClickListener(mapButtonClickListener);
+        mCountDownTimer = new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mCountdownTextView.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+            @Override
+            public void onFinish() {
+                mCountdownTextView.setText("Out of Time!");
+            }
+        }.start();
 
         //--Locations(Map Activity)--
         //--remove the location listener--
