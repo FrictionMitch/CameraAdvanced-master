@@ -270,8 +270,16 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(CameraActivity.this, BMSummary.class);
-                    CameraActivity.this.startActivity(intent);
+                    switch (mImageMain) {
+                        case R.mipmap.gut:
+                            Intent intent = new Intent(CameraActivity.this, BMSummary.class);
+                            CameraActivity.this.startActivity(intent);
+                            break;
+                        case R.mipmap.fart_shart:
+                            Intent intent1 = new Intent(CameraActivity.this, FartShart.class);
+                            CameraActivity.this.startActivity(intent1);
+                            break;
+                    }
                     mCamera.release();
                     mCamera = null;
                 }

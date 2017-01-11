@@ -187,6 +187,7 @@
             android:layout_marginBottom="10dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:background="@android:color/holo_red_dark"
             />
 
         <Button
@@ -201,7 +202,9 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:minWidth="60dip"
             android:background="@android:color/holo_red_dark"
-            android:minHeight="34dp"/>
+            android:minHeight="34dp"
+            android:visibility="gone"
+            />
 
 
 </RelativeLayout>
