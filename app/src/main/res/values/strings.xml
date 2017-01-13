@@ -21,6 +21,7 @@
         <item>What the hell did you eat?</item>
         <item>Forget new underwear…you are going to need a new toilet after this</item>
         <item>Better get an several plungers, a jack hammer, and some rubber pants. You have your work cut out for you</item>
+        <item>Picasso would proud…assuming he was into 'arts and craps'</item>
     </string-array>
     <string-array name="bottomlineMin">
         <item>I\'m going to be straight with you…it\'s over!  You\'ll have defecated by the time you read this. There\'s no going back from here so just own it.</item>
@@ -51,6 +52,8 @@
         <item>baby carrot</item>
         <item>curly fry</item>
         <item>banana</item>
+        <item>wine bottle…in both length and width</item>
+        <item></item>
     </string-array>
 
 
@@ -84,6 +87,7 @@
         <item>diamonds</item>
         <item>mashed potato</item>
         <item>corn on the cob…minus the cob</item>
+        <item>one word: splatter-bowl</item>
     </string-array>
     
     <!--Fart/Shart arrays-->
