@@ -34,13 +34,20 @@
             android:textStyle="normal|bold"/>
 
         <TextView
+            android:text="Timer error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bottomLineTextView"
-            android:layout_toEndOf="@+id/countdown"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="17dp"
             android:id="@+id/countdownTextView"
-            android:layout_alignTop="@+id/countdown"/>
+            android:layout_alignBaseline="@+id/countdown"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_red_dark"
+            android:shadowDx="10"
+            android:shadowDy="10"/>
+            <!--android:layout_toEndOf="@+id/countdown"-->
 
         <TextView
             android:text="Expiry Date:"
