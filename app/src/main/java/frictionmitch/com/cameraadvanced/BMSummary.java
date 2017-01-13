@@ -1,7 +1,9 @@
 package frictionmitch.com.cameraadvanced;
 
 
+import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import android.*;
 import android.app.Activity;
@@ -40,7 +42,9 @@ public class BMSummary extends Activity {
     private TextView mViscosityTextView;
     private Button mMapButton;
     private CountDownTimer mCountDownTimer;
-    private int mTimer;
+    private int mTime;
+    private String mTimer;
+    private double mDouble;
 
     //--for GPS(Locations Activity)--
     final private int REQUEST_COURSE_ACCESS = 123;
@@ -89,10 +93,41 @@ public class BMSummary extends Activity {
 
         mMapButton = (Button)findViewById(R.id.mapButton);
         mMapButton.setOnClickListener(mapButtonClickListener);
-        mCountDownTimer = new CountDownTimer(30000, 1000) {
+
+        mTimer = mCountdownTextView.getText().toString();
+
+        mTime = Integer.parseInt(mCountdownTextView.getText().toString())*1000;
+//        mDouble = mTime * 1000;
+
+//        mTimer = String.format("%02d:%02d:%02d", mTime / 3600,
+//                (mTime % 3600) / 60, (mTime % 60));
+
+
+//        String.format("%02d:%02d:%02d", durationMinutes / 60, durationMinutes % 60, 0);
+
+        mCountDownTimer = new CountDownTimer(mTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mCountdownTextView.setText("seconds remaining: " + millisUntilFinished / 1000);
+                long durationSeconds = millisUntilFinished/1000;
+//                int hours = (int)TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+//                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+//                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+
+//                mCountdownTextView.setText(String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds));
+                mCountdownTextView.setText(String.format(Locale.getDefault(), "%02d:%02d:%02d",
+                        durationSeconds / 3600,
+                        (durationSeconds % 3600) / 60, (durationSeconds % 60)));
+
+//                time = (long)mTime;
+//                int totalSeconds = (int)(millisUntilFinished / 1000);
+//                int hours = totalSeconds / 3600;
+//                int minutes = totalSeconds % 3600;
+//                int seconds = totalSeconds % 60;
+
+//                mCountdownTextView.setText("seconds remaining: " + millisUntilFinished / 1000);
+//                mCountdownTextView.setText(String.format("Hours: %02d, Minutes: %02d, Seconds: %02d", hours, minutes, seconds));
+//                mCountdownTextView.setText(String.format("%02d:%02d:%02d", time / 3600, (time % 3600) / 60, (time % 60)));
+//                mCountdownTextView.setText("Time left: " + time/1000);
             }
             @Override
             public void onFinish() {
