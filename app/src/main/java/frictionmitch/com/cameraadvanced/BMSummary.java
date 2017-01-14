@@ -9,6 +9,7 @@ import android.*;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static android.R.color.holo_red_dark;
 import static frictionmitch.com.cameraadvanced.CameraActivity.mImageMain;
 import static frictionmitch.com.cameraadvanced.CameraActivity.mSwapCount;
 
@@ -44,7 +46,7 @@ public class BMSummary extends Activity {
     private CountDownTimer mCountDownTimer;
     private int mTime;
     private String mTimer;
-    private double mDouble;
+    private long mDurationSeconds;
 
     //--for GPS(Locations Activity)--
     final private int REQUEST_COURSE_ACCESS = 123;
@@ -108,15 +110,31 @@ public class BMSummary extends Activity {
         mCountDownTimer = new CountDownTimer(mTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                long durationSeconds = millisUntilFinished/1000;
+                mDurationSeconds = millisUntilFinished/1000;
 //                int hours = (int)TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
 //                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
 //                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
 //                mCountdownTextView.setText(String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds));
                 mCountdownTextView.setText(String.format(Locale.getDefault(), "%02d:%02d:%02d",
-                        durationSeconds / 3600,
-                        (durationSeconds % 3600) / 60, (durationSeconds % 60)));
+                        mDurationSeconds / 3600,
+                        (mDurationSeconds % 3600) / 60, (mDurationSeconds % 60)));
+                if(mDurationSeconds <= 600) {
+                    mCountdownTextView.setTextColor(getColor(android.R.color.holo_red_dark));
+                    mCountdownTextView.setTextSize(30);
+                    mMapButton.setBackgroundColor(getColor(android.R.color.holo_red_dark));
+                    mMapButton.setText("Locate Toilet");
+                    if (mDurationSeconds <= 500) {
+                        mMapButton.setText("Buy New Underwear");
+                        mMapButton.setBackgroundColor(Color.parseColor("#663300"));
+                        mMapButton.setTextColor(Color.parseColor("#ffffff"));
+                    }
+                } else {
+                    mCountdownTextView.setTextColor(getColor(android.R.color.holo_green_dark));
+                    mCountdownTextView.setTextSize(20);
+                    mMapButton.setBackgroundColor(getColor(android.R.color.holo_green_dark));
+                    mMapButton.setText("Locate Toilet");
+                }
 
 //                time = (long)mTime;
 //                int totalSeconds = (int)(millisUntilFinished / 1000);

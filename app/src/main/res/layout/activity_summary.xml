@@ -44,7 +44,7 @@
             android:layout_alignBaseline="@+id/countdown"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@android:color/holo_green_dark"
             android:shadowDx="10"
             android:shadowDy="10"/>
             <!--android:layout_toEndOf="@+id/countdown"-->
@@ -195,7 +195,9 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@android:color/holo_red_dark"
-            />
+            android:textAlignment="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
         <Button
             android:id="@+id/back_button"
@@ -207,7 +209,7 @@
             android:elevation="8dp"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:minWidth="60dip"
+            android:minWidth="60dp"
             android:background="@android:color/holo_red_dark"
             android:minHeight="34dp"
             android:visibility="gone"
