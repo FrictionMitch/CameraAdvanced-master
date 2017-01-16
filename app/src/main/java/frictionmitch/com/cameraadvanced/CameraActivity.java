@@ -258,7 +258,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
             mCamera.release();
             mCamera = null;
                 }
-            }, 4000);
+            }, 2000);
 
         }
     };
@@ -283,7 +283,7 @@ public class CameraActivity extends Activity implements PictureCallback, Surface
                     mCamera.release();
                     mCamera = null;
                 }
-            }, 4000);
+            }, 1900);
         }
     };
 
